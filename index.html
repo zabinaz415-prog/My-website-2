@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fashion & Art Academy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --pink: #d6226c;
+      --pink-dark: #b81658;
+      --pink-light: #fce7ef;
+      --teal: #0b7277;
+      --teal-dark: #075256;
+      --teal-light: #e0f2f1;
+      --dark: #222222;
+      --gray: #666666;
+      --bg: #fff9fa;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    /* Navigation */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 8%;
+      background: #ffffff;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--pink);
+      text-decoration: none;
+    }
+
+    .nav-logo span {
+      color: var(--teal);
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--pink);
+    }
+
+    .nav-btn {
+      background: var(--pink);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    .nav-btn:hover {
+      background: var(--pink-dark);
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 70px 20px 50px;
+      background: linear-gradient(180deg, #ffeef3 0%, #fff9fa 100%);
+    }
+
+    .hero-brand h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      font-style: italic;
+      color: var(--pink);
+      line-height: 1;
+      display: inline-block;
+    }
+
+    .hero-brand h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.8rem;
+      color: var(--teal);
+      display: inline-block;
+      margin-left: 10px;
+    }
+
+    .hero-brand .sub {
+      font-size: 1.6rem;
+      letter-spacing: 8px;
+      font-weight: 700;
+      color: #333;
+      margin-top: 5px;
+      text-transform: uppercase;
+      display: block;
+    }
+
+    .hero-tagline {
+      margin: 25px 0 20px;
+      font-size: 1.35rem;
+      font-weight: 600;
+    }
+
+    .hero-tagline .pink { color: var(--pink); }
+    .hero-tagline .teal { color: var(--teal); }
+
+    .courses-badge {
+      display: inline-block;
+      background-color: var(--teal);
+      color: #ffffff;
+      padding: 12px 35px;
+      border-radius: 50px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin: 10px auto 25px;
+      box-shadow: 0 6px 18px rgba(11, 114, 119, 0.25);
+    }
+
+    .quote-text {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.4rem;
+      color: var(--teal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    /* Features Ribbon */
+    .features-bar {
+      background: linear-gradient(90deg, #d6226c 0%, #e83e8c 100%);
+      color: #ffffff;
+      padding: 35px 20px;
+      border-radius: 30px;
+      margin: 0 auto;
+      max-width: 1100px;
+      box-shadow: 0 10px 30px rgba(214, 34, 108, 0.25);
+    }
+
+    .features-container {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .feature-item i {
+      font-size: 2.2rem;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 12px;
+      border-radius: 50%;
+    }
+
+    /* Courses Section */
+    .section {
+      padding: 70px 8%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: var(--teal);
+      margin-bottom: 10px;
+    }
+
+    .section-sub {
+      text-align: center;
+      color: var(--gray);
+      margin-bottom: 45px;
+    }
+
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 25px;
+    }
+
+    .course-card {
+      background: #ffffff;
+      border-radius: 15px;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+      border-top: 4px solid var(--pink);
+    }
+
+    .course-icon {
+      width: 65px;
+      height: 65px;
+      line-height: 65px;
+      background: var(--pink-light);
+      color: var(--pink);
+      border-radius: 50%;
+      font-size: 1.7rem;
+      margin: 0 auto 15px;
+    }
+
+    .course-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+    }
+
+    .course-card p {
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+
+    /* Contact Details & Form Section */
+    .contact-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 40px;
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 25px;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.06);
+    }
+
+    .contact-info {
+      background: linear-gradient(135deg, #0b7277 0%, #075256 100%);
+      color: white;
+      padding: 35px 30px;
+      border-radius: 20px;
+    }
+
+    .contact-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+
+    .info-list {
+      list-style: none;
+      margin: 30px 0;
+    }
+
+    .info-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      margin-bottom: 25px;
+      font-size: 0.95rem;
+    }
+
+    .info-list i {
+      font-size: 1.3rem;
+      color: #7de8ed;
+      margin-top: 3px;
+    }
+
+    .info-list a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .whatsapp-direct-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background-color: #25d366;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+    }
+
+    /* Form */
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--pink);
+    }
+
+    .submit-btn {
+      background: var(--pink);
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 25px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    /* Floating WhatsApp Button */
+    .floating-whatsapp {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background-color: #25d366;
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      z-index: 2000;
+      text-decoration: none;
+      transition: transform 0.3s;
+    }
+
+    .floating-whatsapp:hover {
+      transform: scale(1.1);
+    }
+
+    /* Footer */
+    footer {
+      background: #1a1a1a;
+      color: #ffffff;
+      text-align: center;
+      padding: 25px 20px;
+      margin-top: 50px;
+    }
+
+    @media (max-width: 850px) {
+      .contact-wrapper { grid-template-columns: 1fr; }
+      .hero-brand h1 { font-size: 2.8rem; }
+      .hero-brand h2 { font-size: 2.6rem; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating WhatsApp Icon -->
+  <a href="https://wa.me/+919876543210?text=Hello!%20Mujhe%20admission%20ke%20bare%20me%20jankari%20chahiye." target="_blank" class="floating-whatsapp" title="WhatsApp Us">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#" class="nav-logo">Fashion <span>& Art</span></a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#courses">Courses</a></li>
+      <li><a href="#features">Why Us</a></li>
+      <li><a href="#contact">Contact & Admission</a></li>
+    </ul>
+    <a href="tel:+919876543210" class="nav-btn"><i class="fa-solid fa-phone"></i> Call Now</a>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero" id="home">
+    <div class="hero-brand">
+      <h1>Fashion</h1>
+      <h2>& Art</h2>
+      <span class="sub">ACADEMY</span>
+    </div>
+
+    <p class="hero-tagline">
+      <span class="pink">Learn Today</span> • 
+      <span class="teal">Create Tomorrow</span> • 
+      <span class="pink">Earn Forever</span>
+    </p>
+
+    <div class="courses-badge">
+      FASHION DESIGNING • TIE & DYE • HAND EMBROIDERY • ART & PAINTING
+    </div>
+
+    <p class="quote-text">
+      <span>🌿</span> Explore Your Creativity, Design Your Future <span>🌿</span>
+    </p>
+  </header>
+
+  <!-- Ribbon Features -->
+  <section id="features" style="padding: 0 20px;">
+    <div class="features-bar">
+      <div class="features-container">
+        <div class="feature-item">
+          <i class="fa-solid fa-graduation-cap"></i>
+          <div>Expert<br>Trainers</div>
+        </div>
+        <div class="feature-item">
+          <i class="fa-solid fa-chalkboard-user"></i>
+          <div>Practical<br>Training</div>
+        </div>
+        <div class="feature-item">
+          <i class="fa-solid fa-users"></i>
+          <div>Personal<br>Guidance</div>
+        </div>
+        <div class="feature-item">
+          <i class="fa-solid fa-certificate"></i>
+          <div>Certificate<br>Provided</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Courses -->
+  <section class="section" id="courses">
+    <h2 class="section-title">Our Featured Courses</h2>
+    <p class="section-sub">Apne hunar ko career me badlein</p>
+
+    <div class="course-grid">
+      <div class="course-card">
+        <div class="course-icon"><i class="fa-solid fa-vest"></i></div>
+        <h3>Fashion Designing</h3>
+        <p>Sketching, pattern cutting, garment making aur latest boutique styles.</p>
+      </div>
+
+      <div class="course-card">
+        <div class="course-icon"><i class="fa-solid fa-shirt"></i></div>
+        <h3>Tie & Dye</h3>
+        <p>Multiple dyeing methods, spiral patterns aur custom fabric color crafting.</p>
+      </div>
+
+      <div class="course-card">
+        <div class="course-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+        <h3>Hand Embroidery</h3>
+        <p>Traditional aari,  mirror work aur thread designs.</p>
+      </div>
+
+      <div class="course-card">
+        <div class="course-icon"><i class="fa-solid fa-palette"></i></div>
+        <h3>Art & Painting</h3>
+        <p>Canvas Tissue work , Lippon Art watercolor aur sketching masterclasses.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Admission Section -->
+  <section class="section" id="contact" style="padding-top: 10px;">
+    <h2 class="section-title">Contact & Admission</h2>
+    <p class="section-sub">Hamse judein ya direct center par visit karein</p>
+
+    <div class="contact-wrapper">
+      <!-- Address & Info -->
+      <div class="contact-info">
+        <h3>Get In Touch</h3>
+        <p>Course fees, batch timing ya admission enquiry ke liye direct call ya WhatsApp karein.</p>
+
+        <ul class="info-list">
+          <li>
+            <i class="fa-solid fa-location-dot"></i>
+            <div>
+              <strong>Academy Address:</strong><br>
+              Ladhaawala Chori Gali, Muzaffarnagar, Uttar Pradesh
+            </div>
+          </li>
+          <li>
+            <i class="fa-solid fa-phone"></i>
+            <div>
+              <strong>Call Us:</strong><br>
+              <a href="tel:+91 9876543210">+91 98765 43210</a>
+            </div>
+          </li>
+          <li>
+            <i class="fa-brands fa-whatsapp"></i>
+            <div>
+              <strong>WhatsApp:</strong><br>
+              <a href="https://wa.me/+91 98765 432110" target="_blank">+91 98765 432110</a>
+            </div>
+          </li>
+        </ul>
+
+        <a href="https://wa.me/https://wa.me/+91 9876543210?text=Hello!%20Admission%20ki%20detail%20chahiye." target="_blank" class="whatsapp-direct-btn">
+          <i class="fa-brands fa-whatsapp" style="font-size: 1.4rem;"></i> Chat on WhatsApp
+        </a>
+      </div>
+
+      <!-- Quick Inquiry Form -->
+      <div>
+        <h3 style="margin-bottom: 20px; color: var(--pink);">Admission Form</h3>
+        <form onsubmit="alert('Aapki inquiry submit ho gayi hai!'); return false;">
+          <div class="form-group">
+            <label>Student Name</label>
+            <input type="text" placeholder="Apna naam daalein" required />
+          </div>
+
+          <div class="form-group">
+            <label>Phone / WhatsApp Number</label>
+            <input type="tel" placeholder="Mobile number" required />
+          </div>
+
+          <div class="form-group">
+            <label>Select Course</label>
+            <select required>
+              <option value="">Course chunein...</option>
+              <option value="fashion">Fashion Designing</option>
+  
+              
+              <option value="art">Art & Painting</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Message</label>
+            <textarea rows="3" placeholder="Aapka koi sawaal..."></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">Send Details</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Fashion & Art Academy. All Rights Reserved.</p>
+  </footer>
+
+</body>
+</html>
