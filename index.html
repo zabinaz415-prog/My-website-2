@@ -1,573 +1,617 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fashion & Art Academy</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For My Special One 💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=Great+Vibes&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --pink: #d6226c;
-      --pink-dark: #b81658;
-      --pink-light: #fce7ef;
-      --teal: #0b7277;
-      --teal-dark: #075256;
-      --teal-light: #e0f2f1;
-      --dark: #222222;
-      --gray: #666666;
-      --bg: #fff9fa;
-    }
-
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
+      user-select: none;
     }
 
     body {
-      background-color: var(--bg);
-      color: var(--dark);
-      line-height: 1.6;
-    }
-
-    /* Navigation */
-    nav {
+      background: radial-gradient(circle at center, #2e4a87 0%, #151d3b 70%, #0b0f20 100%);
+      min-height: 100vh;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
-      padding: 15px 8%;
-      background: #ffffff;
-      box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    .nav-logo {
+      overflow: hidden;
       font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--pink);
-      text-decoration: none;
+      color: #fff;
+      position: relative;
     }
 
-    .nav-logo span {
-      color: var(--teal);
+    /* Floating background ambient hearts */
+    .bg-hearts {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
     }
 
-    .nav-links {
+    .floating-mini-heart {
+      position: absolute;
+      bottom: -20px;
+      font-size: 1.2rem;
+      color: rgba(255, 182, 193, 0.45);
+      animation: rise 7s linear infinite;
+    }
+
+    @keyframes rise {
+      0% { transform: translateY(0) scale(0.8) rotate(0deg); opacity: 0; }
+      20% { opacity: 0.8; }
+      100% { transform: translateY(-110vh) scale(1.2) rotate(360deg); opacity: 0; }
+    }
+
+    .scene {
+      position: absolute;
+      inset: 0;
       display: flex;
-      list-style: none;
-      gap: 25px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1;
+      padding: 20px;
+      text-align: center;
     }
 
-    .nav-links a {
-      text-decoration: none;
-      color: var(--dark);
-      font-weight: 500;
-      transition: color 0.3s;
+    .scene.active {
+      opacity: 1;
+      pointer-events: auto;
     }
 
-    .nav-links a:hover {
-      color: var(--pink);
+    /* ================= SCENE 0: LOCK / PIN SCREEN ================= */
+    .lock-card {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(12px);
+      padding: 30px 25px;
+      border-radius: 28px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 320px;
+      width: 90%;
+    }
+
+    /* Cute SVG Kitty */
+    .kitty-container {
+      width: 110px;
+      height: 110px;
+      position: relative;
+      margin-bottom: 12px;
+      animation: catFloat 2.6s ease-in-out infinite alternate;
+    }
+
+    @keyframes catFloat {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-7px); }
+    }
+
+    .kitty-heart-bubble {
+      position: absolute;
+      top: -8px;
+      right: 5px;
+      font-size: 1.3rem;
+      animation: pulsePop 1.3s infinite;
+    }
+
+    @keyframes pulsePop {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.25); }
+    }
+
+    .lock-title {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1.15rem;
+      color: #ffe4e6;
+      margin-bottom: 4px;
+    }
+
+    .lock-sub {
+      font-size: 0.8rem;
+      color: #cbd5e1;
+      font-style: italic;
+      margin-bottom: 18px;
+    }
+
+    .pin-dots {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .dot {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      border: 2px solid #f472b6;
+      transition: all 0.2s ease;
+    }
+
+    .dot.filled {
+      background: #f472b6;
+      box-shadow: 0 0 10px #f472b6;
+    }
+
+    .keypad {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      width: 100%;
+    }
+
+    .key-btn {
+      font-family: 'Quicksand', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      height: 48px;
+      border-radius: 50px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s ease;
+    }
+
+    .key-btn:active {
+      transform: scale(0.92);
+      background: rgba(244, 114, 182, 0.4);
+    }
+
+    .error-msg {
+      margin-top: 10px;
+      font-size: 0.8rem;
+      color: #fda4af;
+      height: 18px;
+      font-family: 'Quicksand', sans-serif;
+    }
+
+    /* ================= SCENE 1 ================= */
+    .caption-sub {
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      font-style: italic;
+      color: #cbd5e1;
+      margin-bottom: 30px;
+      text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
+    }
+
+    .heart-glow {
+      position: relative;
+      width: 110px;
+      height: 100px;
+      cursor: pointer;
+      animation: beat 1.4s ease-in-out infinite;
+      filter: drop-shadow(0 0 30px #ff4d6d);
+    }
+
+    .heart-glow::before,
+    .heart-glow::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 55px;
+      height: 90px;
+      border-radius: 50px 50px 0 0;
+      background: radial-gradient(circle, #ff8fa3, #ff0054);
+    }
+
+    .heart-glow::before {
+      left: 55px;
+      transform: rotate(-45deg);
+      transform-origin: 0 100%;
+    }
+
+    .heart-glow::after {
+      left: 0;
+      transform: rotate(45deg);
+      transform-origin: 100% 100%;
+    }
+
+    @keyframes beat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+
+    .tap-hint {
+      margin-top: 35px;
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      opacity: 0.75;
+    }
+
+    /* ================= SCENE 2 ================= */
+    .title-small {
+      font-size: 1.2rem;
+      font-style: italic;
+      color: #d1d5db;
+      margin-bottom: 8px;
+    }
+
+    .big-question {
+      font-size: 3.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-align: center;
+      line-height: 1.15;
+      text-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+    }
+
+    .underline-bar {
+      width: 140px;
+      height: 3px;
+      background: #f59e0b;
+      margin: 20px auto;
+      border-radius: 2px;
+    }
+
+    .promise {
+      font-size: 1rem;
+      font-style: italic;
+      color: #f1f5f9;
+    }
+
+    /* ================= SCENE 3 ================= */
+    .tree-stage {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .tree {
+      position: absolute;
+      bottom: 0;
+      width: 250px;
+      height: 450px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .tree.left { left: 10%; }
+    .tree.right { right: 10%; }
+
+    .tree-label {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.2rem;
+      color: #fbcfe8;
+      margin-bottom: 8px;
+    }
+
+    .heart-bloom-cloud {
+      font-size: 3.5rem;
+      filter: drop-shadow(0 0 16px rgba(244, 114, 182, 0.6));
+      animation: floatHeart 3s ease-in-out infinite alternate;
+    }
+
+    .trunk {
+      width: 6px;
+      height: 170px;
+      background: #64748b;
+      border-radius: 4px;
+    }
+
+    .signature-text {
+      position: absolute;
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.5rem;
+      color: #fed7aa;
+      text-shadow: 0 0 15px rgba(254, 215, 170, 0.7);
+      bottom: 30%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    @keyframes floatHeart {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-10px); }
+    }
+
+    /* ================= SCENE 4 ================= */
+    #constellation-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .center-text {
+      position: absolute;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    .quote {
+      font-size: 1rem;
+      font-style: italic;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .headline {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.6rem;
+      color: #f472b6;
+      text-shadow: 0 0 20px rgba(244, 114, 182, 0.7);
     }
 
     .nav-btn {
-      background: var(--pink);
-      color: white;
-      padding: 8px 20px;
-      border-radius: 25px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: background 0.3s;
-    }
-
-    .nav-btn:hover {
-      background: var(--pink-dark);
-    }
-
-    /* Hero Section */
-    .hero {
-      text-align: center;
-      padding: 70px 20px 50px;
-      background: linear-gradient(180deg, #ffeef3 0%, #fff9fa 100%);
-    }
-
-    .hero-brand h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 4rem;
-      font-style: italic;
-      color: var(--pink);
-      line-height: 1;
-      display: inline-block;
-    }
-
-    .hero-brand h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 3.8rem;
-      color: var(--teal);
-      display: inline-block;
-      margin-left: 10px;
-    }
-
-    .hero-brand .sub {
-      font-size: 1.6rem;
-      letter-spacing: 8px;
-      font-weight: 700;
-      color: #333;
-      margin-top: 5px;
-      text-transform: uppercase;
-      display: block;
-    }
-
-    .hero-tagline {
-      margin: 25px 0 20px;
-      font-size: 1.35rem;
-      font-weight: 600;
-    }
-
-    .hero-tagline .pink { color: var(--pink); }
-    .hero-tagline .teal { color: var(--teal); }
-
-    .courses-badge {
-      display: inline-block;
-      background-color: var(--teal);
-      color: #ffffff;
-      padding: 12px 35px;
-      border-radius: 50px;
-      font-size: 1.05rem;
-      font-weight: 600;
-      letter-spacing: 1px;
-      margin: 10px auto 25px;
-      box-shadow: 0 6px 18px rgba(11, 114, 119, 0.25);
-    }
-
-    .quote-text {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 1.4rem;
-      color: var(--teal);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 15px;
-    }
-
-    /* Features Ribbon */
-    .features-bar {
-      background: linear-gradient(90deg, #d6226c 0%, #e83e8c 100%);
-      color: #ffffff;
-      padding: 35px 20px;
+      position: absolute;
+      bottom: 30px;
+      padding: 10px 24px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       border-radius: 30px;
-      margin: 0 auto;
-      max-width: 1100px;
-      box-shadow: 0 10px 30px rgba(214, 34, 108, 0.25);
-    }
-
-    .features-container {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-
-    .feature-item {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      font-size: 1rem;
-      font-weight: 600;
-      text-transform: uppercase;
-    }
-
-    .feature-item i {
-      font-size: 2.2rem;
-      background: rgba(255, 255, 255, 0.2);
-      padding: 12px;
-      border-radius: 50%;
-    }
-
-    /* Courses Section */
-    .section {
-      padding: 70px 8%;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .section-title {
-      text-align: center;
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      color: var(--teal);
-      margin-bottom: 10px;
-    }
-
-    .section-sub {
-      text-align: center;
-      color: var(--gray);
-      margin-bottom: 45px;
-    }
-
-    .course-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 25px;
-    }
-
-    .course-card {
-      background: #ffffff;
-      border-radius: 15px;
-      padding: 30px 20px;
-      text-align: center;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.06);
-      border-top: 4px solid var(--pink);
-    }
-
-    .course-icon {
-      width: 65px;
-      height: 65px;
-      line-height: 65px;
-      background: var(--pink-light);
-      color: var(--pink);
-      border-radius: 50%;
-      font-size: 1.7rem;
-      margin: 0 auto 15px;
-    }
-
-    .course-card h3 {
-      font-size: 1.25rem;
-      margin-bottom: 10px;
-    }
-
-    .course-card p {
-      color: var(--gray);
-      font-size: 0.9rem;
-    }
-
-    /* Contact Details & Form Section */
-    .contact-wrapper {
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 40px;
-      background: #ffffff;
-      padding: 40px;
-      border-radius: 25px;
-      box-shadow: 0 5px 25px rgba(0,0,0,0.06);
-    }
-
-    .contact-info {
-      background: linear-gradient(135deg, #0b7277 0%, #075256 100%);
-      color: white;
-      padding: 35px 30px;
-      border-radius: 20px;
-    }
-
-    .contact-info h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      margin-bottom: 15px;
-    }
-
-    .info-list {
-      list-style: none;
-      margin: 30px 0;
-    }
-
-    .info-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 15px;
-      margin-bottom: 25px;
-      font-size: 0.95rem;
-    }
-
-    .info-list i {
-      font-size: 1.3rem;
-      color: #7de8ed;
-      margin-top: 3px;
-    }
-
-    .info-list a {
-      color: white;
-      text-decoration: none;
-    }
-
-    .whatsapp-direct-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background-color: #25d366;
-      color: white;
-      padding: 12px 24px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: 600;
-      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
-    }
-
-    /* Form */
-    .form-group {
-      margin-bottom: 15px;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: 500;
-      font-size: 0.9rem;
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%;
-      padding: 10px 12px;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      font-size: 0.95rem;
-      outline: none;
-    }
-
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      border-color: var(--pink);
-    }
-
-    .submit-btn {
-      background: var(--pink);
-      color: white;
-      border: none;
-      padding: 12px 25px;
-      font-size: 1rem;
-      font-weight: 600;
-      border-radius: 25px;
+      color: #fff;
+      font-size: 0.85rem;
+      letter-spacing: 1.5px;
       cursor: pointer;
-      width: 100%;
+      backdrop-filter: blur(5px);
+      transition: 0.2s;
     }
-
-    /* Floating WhatsApp Button */
-    .floating-whatsapp {
-      position: fixed;
-      bottom: 25px;
-      right: 25px;
-      background-color: #25d366;
-      color: white;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 32px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-      z-index: 2000;
-      text-decoration: none;
-      transition: transform 0.3s;
-    }
-
-    .floating-whatsapp:hover {
-      transform: scale(1.1);
-    }
-
-    /* Footer */
-    footer {
-      background: #1a1a1a;
-      color: #ffffff;
-      text-align: center;
-      padding: 25px 20px;
-      margin-top: 50px;
-    }
-
-    @media (max-width: 850px) {
-      .contact-wrapper { grid-template-columns: 1fr; }
-      .hero-brand h1 { font-size: 2.8rem; }
-      .hero-brand h2 { font-size: 2.6rem; }
-      .nav-links { display: none; }
+    .nav-btn:hover {
+      background: rgba(244, 114, 182, 0.3);
     }
   </style>
 </head>
 <body>
 
-  <!-- Floating WhatsApp Icon -->
-  <a href="https://wa.me/+91 9286261202?text=Hello!%20Mujhe%20admission%20ke%20bare%20me%20jankari%20chahiye." target="_blank" class="floating-whatsapp" title="WhatsApp Us">
-    <i class="fa-brands fa-whatsapp"></i>
-  </a>
+  <!-- Floating Hearts Background -->
+  <div class="bg-hearts" id="bg-hearts"></div>
 
-  <!-- Navigation -->
-  <nav>
-    <a href="#" class="nav-logo">Fashion <span>& Art</span></a>
-    <ul class="nav-links">
-      <li><a href="#home">Home</a></li>
-      <li><a href="#courses">Courses</a></li>
-      <li><a href="#features">Why Us</a></li>
-      <li><a href="#contact">Contact & Admission</a></li>
-    </ul>
-    <a href="tel:+919876543210" class="nav-btn"><i class="fa-solid fa-phone"></i> Call Now</a>
-  </nav>
+  <!-- SCENE 0: LOCK PIN & KITTY -->
+  <section class="scene active" id="scene0">
+    <div class="lock-card">
+      
+      <!-- Cute Animated Kitty -->
+      <div class="kitty-container">
+        <div class="kitty-heart-bubble">💖</div>
+        <svg viewBox="0 0 120 120" width="100%" height="100%">
+          <!-- Ears -->
+          <polygon points="25,48 40,15 58,40" fill="#f8fafc" stroke="#fed7aa" stroke-width="2"/>
+          <polygon points="30,44 42,24 53,38" fill="#fda4af"/>
+          <polygon points="95,48 80,15 62,40" fill="#f8fafc" stroke="#fed7aa" stroke-width="2"/>
+          <polygon points="90,44 78,24 67,38" fill="#fda4af"/>
+          <!-- Head -->
+          <ellipse cx="60" cy="62" rx="42" ry="34" fill="#ffffff" filter="drop-shadow(0 2px 5px rgba(0,0,0,0.15))"/>
+          <!-- Eyes -->
+          <ellipse cx="44" cy="58" rx="4.5" ry="5.5" fill="#1e293b"/>
+          <circle cx="46" cy="56" r="1.5" fill="#ffffff"/>
+          <ellipse cx="76" cy="58" rx="4.5" ry="5.5" fill="#1e293b"/>
+          <circle cx="78" cy="56" r="1.5" fill="#ffffff"/>
+          <!-- Blush -->
+          <ellipse cx="36" cy="67" rx="6" ry="3.5" fill="#f472b6" opacity="0.65"/>
+          <ellipse cx="84" cy="67" rx="6" ry="3.5" fill="#f472b6" opacity="0.65"/>
+          <!-- Cute Nose & Mouth -->
+          <polygon points="60,65 57,68 63,68" fill="#fb7185"/>
+          <path d="M 55,71 Q 60,76 65,71" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round"/>
+          <!-- Whiskers -->
+          <line x1="22" y1="62" x2="35" y2="64" stroke="#cbd5e1" stroke-width="2"/>
+          <line x1="22" y1="69" x2="35" y2="68" stroke="#cbd5e1" stroke-width="2"/>
+          <line x1="85" y1="64" x2="98" y2="62" stroke="#cbd5e1" stroke-width="2"/>
+          <line x1="85" y1="68" x2="98" y2="69" stroke="#cbd5e1" stroke-width="2"/>
+          <!-- Little Paws -->
+          <ellipse cx="46" cy="94" rx="10" ry="6" fill="#f1f5f9"/>
+          <ellipse cx="74" cy="94" rx="10" ry="6" fill="#f1f5f9"/>
+        </svg>
+      </div>
 
-  <!-- Hero Section -->
-  <header class="hero" id="home">
-    <div class="hero-brand">
-      <h1>Fashion</h1>
-      <h2>& Art</h2>
-      <span class="sub">ACADEMY</span>
+      <h2 class="lock-title">Kitty is Guarding My Heart</h2>
+      <p class="lock-sub">Enter our secret passcode (Hint: 143)</p>
+
+      <div class="pin-dots">
+        <div class="dot" id="dot0"></div>
+        <div class="dot" id="dot1"></div>
+        <div class="dot" id="dot2"></div>
+      </div>
+
+      <div class="keypad">
+        <button class="key-btn" onclick="pressKey('1')">1</button>
+        <button class="key-btn" onclick="pressKey('2')">2</button>
+        <button class="key-btn" onclick="pressKey('3')">3</button>
+        <button class="key-btn" onclick="pressKey('4')">4</button>
+        <button class="key-btn" onclick="pressKey('5')">5</button>
+        <button class="key-btn" onclick="pressKey('6')">6</button>
+        <button class="key-btn" onclick="pressKey('7')">7</button>
+        <button class="key-btn" onclick="pressKey('8')">8</button>
+        <button class="key-btn" onclick="pressKey('9')">9</button>
+        <button class="key-btn" onclick="clearPin()">C</button>
+        <button class="key-btn" onclick="pressKey('0')">0</button>
+        <button class="key-btn" onclick="deleteKey()">⌫</button>
+      </div>
+
+      <div class="error-msg" id="errorMsg"></div>
     </div>
+  </section>
 
-    <p class="hero-tagline">
-      <span class="pink">Learn Today</span> • 
-      <span class="teal">Create Tomorrow</span> • 
-      <span class="pink">Earn Forever</span>
-    </p>
+  <!-- SCENE 1 -->
+  <section class="scene" id="scene1" onclick="nextScene(2)">
+    <p class="caption-sub">for the one my heart beats for</p>
+    <div class="heart-glow"></div>
+    <p class="tap-hint">TOUCH THE HEART</p>
+  </section>
 
-    <div class="courses-badge">
-      FASHION DESIGNING • TIE & DYE • HAND EMBROIDERY • ART & PAINTING
-    </div>
+  <!-- SCENE 2 -->
+  <section class="scene" id="scene2" onclick="nextScene(3)">
+    <p class="title-small">of all the hearts in all the world...</p>
+    <h1 class="big-question">Will You<br/>Be Mine?</h1>
+    <div class="underline-bar"></div>
+    <p class="promise">I promise Sana this is only the beginning</p>
+  </section>
 
-    <p class="quote-text">
-      <span>🌿</span> Explore Your Creativity, Design Your Future <span>🌿</span>
-    </p>
-  </header>
-
-  <!-- Ribbon Features -->
-  <section id="features" style="padding: 0 20px;">
-    <div class="features-bar">
-      <div class="features-container">
-        <div class="feature-item">
-          <i class="fa-solid fa-graduation-cap"></i>
-          <div>Expert<br>Trainers</div>
-        </div>
-        <div class="feature-item">
-          <i class="fa-solid fa-chalkboard-user"></i>
-          <div>Practical<br>Training</div>
-        </div>
-        <div class="feature-item">
-          <i class="fa-solid fa-users"></i>
-          <div>Personal<br>Guidance</div>
-        </div>
-        <div class="feature-item">
-          <i class="fa-solid fa-certificate"></i>
-          <div>Certificate<br>Provided</div>
-        </div>
+  <!-- SCENE 3 -->
+  <section class="scene" id="scene3" onclick="nextScene(4)">
+    <div class="tree-stage">
+      <div class="tree left">
+        <div class="tree-label">you</div>
+        <div class="heart-bloom-cloud">🌸💖</div>
+        <div class="trunk"></div>
+      </div>
+      <div class="signature-text">I love you</div>
+      <div class="tree right">
+        <div class="tree-label">me</div>
+        <div class="heart-bloom-cloud">💙✨</div>
+        <div class="trunk"></div>
       </div>
     </div>
   </section>
 
-  <!-- Courses -->
-  <section class="section" id="courses">
-    <h2 class="section-title">Our Featured Courses</h2>
-    <p class="section-sub">Apne hunar ko career me badlein</p>
-
-    <div class="course-grid">
-      <div class="course-card">
-        <div class="course-icon"><i class="fa-solid fa-vest"></i></div>
-        <h3>Fashion Designing</h3>
-        <p>Sketching, pattern cutting, garment making aur latest boutique styles.</p>
-      </div>
-
-      <div class="course-card">
-        <div class="course-icon"><i class="fa-solid fa-shirt"></i></div>
-        <h3>Tie & Dye</h3>
-        <p>Multiple dyeing methods, spiral patterns aur custom fabric color crafting.</p>
-      </div>
-
-      <div class="course-card">
-        <div class="course-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-        <h3>Hand Embroidery</h3>
-        <p>Traditional aari,  mirror work aur thread designs.</p>
-      </div>
-
-      <div class="course-card">
-        <div class="course-icon"><i class="fa-solid fa-palette"></i></div>
-        <h3>Art & Painting</h3>
-        <p>Canvas Tissue work , Lippon Art watercolor aur sketching masterclasses.</p>
-      </div>
+  <!-- SCENE 4 -->
+  <section class="scene" id="scene4">
+    <canvas id="constellation-canvas"></canvas>
+    <div class="center-text">
+      <p class="quote">two wings, one sky</p>
+      <h2 class="headline">fly with me</h2>
     </div>
+    <button class="nav-btn" onclick="nextScene(1)">RELIVE AGAIN</button>
   </section>
 
-  <!-- Contact & Admission Section -->
-  <section class="section" id="contact" style="padding-top: 10px;">
-    <h2 class="section-title">Contact & Admission</h2>
-    <p class="section-sub">Hamse judein ya direct center par visit karein</p>
+  <script>
+    // Secret Passcode Config
+    const SECRET_PIN = "143"; 
+    let currentInput = "";
 
-    <div class="contact-wrapper">
-      <!-- Address & Info -->
-      <div class="contact-info">
-        <h3>Get In Touch</h3>
-        <p>Course fees, batch timing ya admission enquiry ke liye direct call ya WhatsApp karein.</p>
+    function pressKey(num) {
+      if (currentInput.length < SECRET_PIN.length) {
+        currentInput += num;
+        updateDots();
+      }
+      if (currentInput.length === SECRET_PIN.length) {
+        setTimeout(verifyPin, 150);
+      }
+    }
 
-        <ul class="info-list">
-          <li>
-            <i class="fa-solid fa-location-dot"></i>
-            <div>
-              <strong>Academy Address:</strong><br>
-             Owner Sana - Ladhaawala Chori Gali, Muzaffarnagar, Uttar Pradesh
-            </div>
-          </li>
-          <li>
-            <i class="fa-solid fa-phone"></i>
-            <div>
-              <strong>Call Us:</strong><br>
-              <a href="tel:+91 92862 61202">+91 92862 61202</a>
-            </div>
-          </li>
-          <li>
-            <i class="fa-brands fa-whatsapp"></i>
-            <div>
-              <strong>WhatsApp:</strong><br>
-              <a href="https://wa.me/+91 92862 61202" target="_blank">+91 92862 61202</a>
-            </div>
-          </li>
-        </ul>
+    function deleteKey() {
+      currentInput = currentInput.slice(0, -1);
+      updateDots();
+    }
 
-        <a href="https://wa.me/https://wa.me/+91 92862 61202?text=Hello!%20Admission%20ki%20detail%20chahiye." target="_blank" class="whatsapp-direct-btn">
-          <i class="fa-brands fa-whatsapp" style="font-size: 1.4rem;"></i> Chat on WhatsApp
-        </a>
-      </div>
+    function clearPin() {
+      currentInput = "";
+      updateDots();
+      document.getElementById('errorMsg').innerText = "";
+    }
 
-      <!-- Quick Inquiry Form -->
-      <div>
-        <h3 style="margin-bottom: 20px; color: var(--pink);">Admission Form</h3>
-        <form onsubmit="alert('Aapki inquiry submit ho gayi hai!'); return false;">
-          <div class="form-group">
-            <label>Student Name</label>
-            <input type="text" placeholder="Apna naam daalein" required />
-          </div>
+    function updateDots() {
+      for (let i = 0; i < SECRET_PIN.length; i++) {
+        const dot = document.getElementById(`dot${i}`);
+        if (dot) {
+          if (i < currentInput.length) {
+            dot.classList.add('filled');
+          } else {
+            dot.classList.remove('filled');
+          }
+        }
+      }
+    }
 
-          <div class="form-group">
-            <label>Phone / WhatsApp Number</label>
-            <input type="tel" placeholder="Mobile number" required />
-          </div>
+    function verifyPin() {
+      if (currentInput === SECRET_PIN) {
+        document.getElementById('errorMsg').style.color = '#86efac';
+        document.getElementById('errorMsg').innerText = "Unlocked with love! 💕";
+        setTimeout(() => {
+          nextScene(1);
+        }, 600);
+      } else {
+        document.getElementById('errorMsg').style.color = '#fda4af';
+        document.getElementById('errorMsg').innerText = "Oops! Wrong code, try again 🐱";
+        currentInput = "";
+        setTimeout(updateDots, 400);
+      }
+    }
 
-          <div class="form-group">
-            <label>Select Course</label>
-            <select required>
-              <option value="">Course chunein...</option>
-              <option value="fashion">Fashion Designing</option>
-  
-              
-              <option value="art">Art & Painting</option>
-            </select>
-          </div>
+    // Scene Navigation
+    let activeSceneNum = 0;
+    function nextScene(target) {
+      document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
+      const nextEl = document.getElementById(`scene${target}`);
+      if (nextEl) {
+        nextEl.classList.add('active');
+        activeSceneNum = target;
+        if (target === 4) initConstellation();
+      }
+    }
 
-          <div class="form-group">
-            <label>Message</label>
-            <textarea rows="3" placeholder="Aapka koi sawaal..."></textarea>
-          </div>
+    // Ambient floating background hearts
+    function createBgHearts() {
+      const container = document.getElementById('bg-hearts');
+      const emojis = ['🤍', '✨', '🌸', '💖'];
+      for (let i = 0; i < 16; i++) {
+        const span = document.createElement('span');
+        span.className = 'floating-mini-heart';
+        span.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+        span.style.left = Math.random() * 100 + 'vw';
+        span.style.animationDelay = (Math.random() * 6) + 's';
+        span.style.animationDuration = (5 + Math.random() * 5) + 's';
+        container.appendChild(span);
+      }
+    }
+    createBgHearts();
 
-          <button type="submit" class="submit-btn">Send Details</button>
-        </form>
-      </div>
-    </div>
-  </section>
+    // Scene 4: Constellation Canvas
+    function initConstellation() {
+      const canvas = document.getElementById('constellation-canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
 
-  <!-- Footer -->
-  <footer>
-    <p>© 2026 Fashion & Art Academy. All Rights Reserved.</p>
-  </footer>
+      const points = [];
+      const totalPoints = 18;
+      const scale = Math.min(canvas.width, canvas.height) / 36;
+      const cx = canvas.width / 2;
+      const cy = canvas.height / 2;
 
+      for (let i = 0; i < totalPoints; i++) {
+        const t = (Math.PI * 2 * i) / totalPoints;
+        const x = 16 * Math.pow(Math.sin(t), 3);
+        const y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
+        points.push({ x: cx + x * scale, y: cy + y * scale });
+      }
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.45)';
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([5, 5]);
+
+      ctx.beginPath();
+      ctx.moveTo(points[0].x, points[0].y);
+      for (let i = 1; i < points.length; i++) {
+        ctx.lineTo(points[i].x, points[i].y);
+      }
+      ctx.closePath();
+      ctx.stroke();
+
+      points.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 3.5, 0, Math.PI * 2);
+        ctx.fillStyle = '#ffffff';
+        ctx.shadowColor = '#f472b6';
+        ctx.shadowBlur = 10;
+        ctx.fill();
+      });
+    }
+
+    window.addEventListener('resize', () => {
+      if (activeSceneNum === 4) initConstellation();
+    });
+  </script>
 </body>
 </html>
