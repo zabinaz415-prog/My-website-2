@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>For My Special One 💖</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=Great+Vibes&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>You are special!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     * {
       box-sizing: border-box;
@@ -15,603 +14,370 @@
     }
 
     body {
-      background: radial-gradient(circle at center, #2e4a87 0%, #151d3b 70%, #0b0f20 100%);
+      background: radial-gradient(circle at center, #23081e 0%, #0c020d 100%);
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
-      font-family: 'Playfair Display', serif;
-      color: #fff;
-      position: relative;
-    }
-
-    /* Floating background ambient hearts */
-    .bg-hearts {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
-    }
-
-    .floating-mini-heart {
-      position: absolute;
-      bottom: -20px;
-      font-size: 1.2rem;
-      color: rgba(255, 182, 193, 0.45);
-      animation: rise 7s linear infinite;
-    }
-
-    @keyframes rise {
-      0% { transform: translateY(0) scale(0.8) rotate(0deg); opacity: 0; }
-      20% { opacity: 0.8; }
-      100% { transform: translateY(-110vh) scale(1.2) rotate(360deg); opacity: 0; }
-    }
-
-    .scene {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1);
-      z-index: 1;
+      overflow-x: hidden;
       padding: 20px;
-      text-align: center;
     }
 
-    .scene.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    /* ================= SCENE 0: LOCK / PIN SCREEN ================= */
-    .lock-card {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(12px);
-      padding: 30px 25px;
-      border-radius: 28px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      max-width: 320px;
-      width: 90%;
-    }
-
-    /* Cute SVG Kitty */
-    .kitty-container {
-      width: 110px;
-      height: 110px;
-      position: relative;
-      margin-bottom: 12px;
-      animation: catFloat 2.6s ease-in-out infinite alternate;
-    }
-
-    @keyframes catFloat {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-7px); }
-    }
-
-    .kitty-heart-bubble {
-      position: absolute;
-      top: -8px;
-      right: 5px;
-      font-size: 1.3rem;
-      animation: pulsePop 1.3s infinite;
-    }
-
-    @keyframes pulsePop {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.25); }
-    }
-
-    .lock-title {
-      font-family: 'Quicksand', sans-serif;
-      font-size: 1.15rem;
-      color: #ffe4e6;
-      margin-bottom: 4px;
-    }
-
-    .lock-sub {
-      font-size: 0.8rem;
-      color: #cbd5e1;
-      font-style: italic;
-      margin-bottom: 18px;
-    }
-
-    .pin-dots {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-
-    .dot {
-      width: 13px;
-      height: 13px;
-      border-radius: 50%;
-      border: 2px solid #f472b6;
-      transition: all 0.2s ease;
-    }
-
-    .dot.filled {
-      background: #f472b6;
-      box-shadow: 0 0 10px #f472b6;
-    }
-
-    .keypad {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
+    .container {
       width: 100%;
-    }
-
-    .key-btn {
-      font-family: 'Quicksand', sans-serif;
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: #fff;
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      height: 48px;
-      border-radius: 50px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.15s ease;
-    }
-
-    .key-btn:active {
-      transform: scale(0.92);
-      background: rgba(244, 114, 182, 0.4);
-    }
-
-    .error-msg {
-      margin-top: 10px;
-      font-size: 0.8rem;
-      color: #fda4af;
-      height: 18px;
-      font-family: 'Quicksand', sans-serif;
-    }
-
-    /* ================= SCENE 1 ================= */
-    .caption-sub {
-      font-size: 1.2rem;
-      letter-spacing: 2px;
-      font-style: italic;
-      color: #cbd5e1;
-      margin-bottom: 30px;
-      text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
-    }
-
-    .heart-glow {
-      position: relative;
-      width: 110px;
-      height: 100px;
-      cursor: pointer;
-      animation: beat 1.4s ease-in-out infinite;
-      filter: drop-shadow(0 0 30px #ff4d6d);
-    }
-
-    .heart-glow::before,
-    .heart-glow::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      width: 55px;
-      height: 90px;
-      border-radius: 50px 50px 0 0;
-      background: radial-gradient(circle, #ff8fa3, #ff0054);
-    }
-
-    .heart-glow::before {
-      left: 55px;
-      transform: rotate(-45deg);
-      transform-origin: 0 100%;
-    }
-
-    .heart-glow::after {
-      left: 0;
-      transform: rotate(45deg);
-      transform-origin: 100% 100%;
-    }
-
-    @keyframes beat {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.15); }
-    }
-
-    .tap-hint {
-      margin-top: 35px;
-      font-size: 0.85rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      opacity: 0.75;
-    }
-
-    /* ================= SCENE 2 ================= */
-    .title-small {
-      font-size: 1.2rem;
-      font-style: italic;
-      color: #d1d5db;
-      margin-bottom: 8px;
-    }
-
-    .big-question {
-      font-size: 3.8rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-align: center;
-      line-height: 1.15;
-      text-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
-    }
-
-    .underline-bar {
-      width: 140px;
-      height: 3px;
-      background: #f59e0b;
-      margin: 20px auto;
-      border-radius: 2px;
-    }
-
-    .promise {
-      font-size: 1rem;
-      font-style: italic;
-      color: #f1f5f9;
-    }
-
-    /* ================= SCENE 3 ================= */
-    .tree-stage {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-      cursor: pointer;
-    }
-
-    .tree {
-      position: absolute;
-      bottom: 0;
-      width: 250px;
-      height: 450px;
+      max-width: 380px;
+      min-height: 520px;
       display: flex;
       flex-direction: column;
+      justify-content: center;
       align-items: center;
-      justify-content: flex-end;
+      text-align: center;
+      position: relative;
     }
 
-    .tree.left { left: 10%; }
-    .tree.right { right: 10%; }
-
-    .tree-label {
-      font-family: 'Great Vibes', cursive;
-      font-size: 2.2rem;
-      color: #fbcfe8;
-      margin-bottom: 8px;
+    .screen {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      animation: fadeIn 0.5s ease forwards;
     }
 
-    .heart-bloom-cloud {
-      font-size: 3.5rem;
-      filter: drop-shadow(0 0 16px rgba(244, 114, 182, 0.6));
-      animation: floatHeart 3s ease-in-out infinite alternate;
+    .screen.active {
+      display: flex;
     }
 
-    .trunk {
-      width: 6px;
-      height: 170px;
-      background: #64748b;
-      border-radius: 4px;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .signature-text {
-      position: absolute;
-      font-family: 'Great Vibes', cursive;
-      font-size: 3.5rem;
-      color: #fed7aa;
-      text-shadow: 0 0 15px rgba(254, 215, 170, 0.7);
-      bottom: 30%;
-      left: 50%;
-      transform: translateX(-50%);
+    .avatar-wrapper {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      border: 2px solid #ff4b93;
+      padding: 6px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 0 25px rgba(255, 75, 147, 0.45);
+      margin-bottom: 25px;
+      background: rgba(255, 75, 147, 0.08);
     }
 
-    @keyframes floatHeart {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-10px); }
-    }
-
-    /* ================= SCENE 4 ================= */
-    #constellation-canvas {
-      position: absolute;
-      inset: 0;
+    .avatar-wrapper img {
       width: 100%;
       height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
     }
 
-    .center-text {
-      position: absolute;
-      text-align: center;
-      pointer-events: none;
+    .fancy-heading {
+      font-family: 'Caveat', cursive;
+      font-size: 2.8rem;
+      color: #ff65a5;
+      margin-bottom: 8px;
     }
 
-    .quote {
-      font-size: 1rem;
-      font-style: italic;
-      letter-spacing: 1px;
-      margin-bottom: 6px;
+    .sub-heading {
+      color: #dfdfea;
+      font-size: 0.95rem;
+      font-weight: 300;
+      margin-bottom: 30px;
     }
 
-    .headline {
-      font-family: 'Great Vibes', cursive;
-      font-size: 3.6rem;
-      color: #f472b6;
-      text-shadow: 0 0 20px rgba(244, 114, 182, 0.7);
-    }
-
-    .nav-btn {
-      position: absolute;
-      bottom: 30px;
-      padding: 10px 24px;
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+    .action-btn {
+      background: linear-gradient(135deg, #e60067, #b0004e);
+      border: none;
+      color: white;
+      padding: 13px 32px;
       border-radius: 30px;
-      color: #fff;
-      font-size: 0.85rem;
-      letter-spacing: 1.5px;
+      font-size: 0.95rem;
+      font-weight: 500;
       cursor: pointer;
-      backdrop-filter: blur(5px);
-      transition: 0.2s;
+      box-shadow: 0 6px 20px rgba(230, 0, 103, 0.4);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: transform 0.2s ease;
     }
-    .nav-btn:hover {
-      background: rgba(244, 114, 182, 0.3);
+
+    .action-btn:hover {
+      transform: scale(1.04);
+    }
+
+    /* Screen 2: Meter */
+    .progress-box {
+      width: 100%;
+      margin: 30px 0 20px 0;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 18px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #b0004e, #ff2a85);
+      border-radius: 20px;
+      transition: width 0.08s ease;
+    }
+
+    .meter-percent {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #ff529a;
+      margin: 15px 0 5px;
+    }
+
+    .meter-warning {
+      color: #ffbf00;
+      background: rgba(255, 191, 0, 0.12);
+      border: 1px dashed rgba(255, 191, 0, 0.4);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-top: 15px;
+      display: none;
+    }
+
+    /* Screen 3: Reveal Cards */
+    .cards-list {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .reveal-card {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 105, 180, 0.2);
+      border-radius: 18px;
+      padding: 13px 18px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      font-size: 0.92rem;
+      color: #ff9ec4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+    }
+
+    .reveal-card.revealed {
+      background: rgba(230, 0, 103, 0.18);
+      border-color: rgba(255, 105, 180, 0.5);
+      color: #ffffff;
+      cursor: default;
+    }
+
+    /* Screen 4: Letter */
+    .letter-envelope {
+      width: 100%;
+      background: #ffb8d2;
+      border-radius: 20px;
+      padding: 30px 22px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      color: #2b0c1e;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.25s ease;
+    }
+
+    .ribbon-icon {
+      font-size: 2.8rem;
+      color: #df1b68;
+      margin-bottom: 10px;
+    }
+
+    .envelope-text {
+      color: #611339;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .note-content-box {
+      display: none;
+      background: #ffc2d8;
+      border-radius: 20px;
+      padding: 24px;
+      color: #2b0b1c;
+      text-align: left;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      width: 100%;
+      min-height: 250px;
+      position: relative;
+    }
+
+    .note-content-box .heart-tag {
+      text-align: center;
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+      color: #e60067;
+    }
+
+    .note-text {
+      min-height: 140px;
+      font-weight: 400;
+    }
+
+    .floating-heart {
+      position: absolute;
+      top: 10px;
+      font-size: 1.1rem;
+      color: #e60067;
     }
   </style>
 </head>
 <body>
 
-  <!-- Floating Hearts Background -->
-  <div class="bg-hearts" id="bg-hearts"></div>
+  <div class="container">
+    
+    <!-- Step 1: Welcome -->
+    <div class="screen active" id="screen-1">
+      <div class="avatar-wrapper">
+        <img src="https://media.tenor.com/J3-L9Vv6w48AAAAM/cute-bear.gif" alt="Cute Avatar" />
+      </div>
+      <h1 class="fancy-heading">Hey Beautiful</h1>
+      <p class="sub-heading">Do you even know how cute you are?</p>
+      <button class="action-btn" onclick="startCutenessTest()">Open My Heart 💗</button>
+    </div>
 
-  <!-- SCENE 0: LOCK PIN & KITTY -->
-  <section class="scene active" id="scene0">
-    <div class="lock-card">
+    <!-- Step 2: Cuteness Meter -->
+    <div class="screen" id="screen-2">
+      <p class="sub-heading" style="margin-bottom: 0;">Measuring your cuteness...</p>
+      <div class="meter-percent" id="percent-val">0%</div>
+      <div class="progress-box">
+        <div class="progress-bar-bg">
+          <div class="progress-fill" id="progress-bar"></div>
+        </div>
+      </div>
+      <p id="meter-status" style="font-size: 0.85rem; color: #bbb;">Calculating cuteness...</p>
+      <div class="meter-warning" id="meter-warning">⚠️ WARNING: TOO CUTE TO HANDLE</div>
+    </div>
+
+    <!-- Step 3: Reveal Cards -->
+    <div class="screen" id="screen-3">
+      <div style="font-size: 2.2rem; margin-bottom: 4px; color: #ff529a;">💖</div>
+      <h2 style="font-size: 1.4rem; font-weight: 600;">Just for you</h2>
+      <p class="sub-heading" style="font-size: 0.85rem; margin-bottom: 15px;">Tap each one to reveal</p>
       
-      <!-- Cute Animated Kitty -->
-      <div class="kitty-container">
-        <div class="kitty-heart-bubble">💖</div>
-        <svg viewBox="0 0 120 120" width="100%" height="100%">
-          <!-- Ears -->
-          <polygon points="25,48 40,15 58,40" fill="#f8fafc" stroke="#fed7aa" stroke-width="2"/>
-          <polygon points="30,44 42,24 53,38" fill="#fda4af"/>
-          <polygon points="95,48 80,15 62,40" fill="#f8fafc" stroke="#fed7aa" stroke-width="2"/>
-          <polygon points="90,44 78,24 67,38" fill="#fda4af"/>
-          <!-- Head -->
-          <ellipse cx="60" cy="62" rx="42" ry="34" fill="#ffffff" filter="drop-shadow(0 2px 5px rgba(0,0,0,0.15))"/>
-          <!-- Eyes -->
-          <ellipse cx="44" cy="58" rx="4.5" ry="5.5" fill="#1e293b"/>
-          <circle cx="46" cy="56" r="1.5" fill="#ffffff"/>
-          <ellipse cx="76" cy="58" rx="4.5" ry="5.5" fill="#1e293b"/>
-          <circle cx="78" cy="56" r="1.5" fill="#ffffff"/>
-          <!-- Blush -->
-          <ellipse cx="36" cy="67" rx="6" ry="3.5" fill="#f472b6" opacity="0.65"/>
-          <ellipse cx="84" cy="67" rx="6" ry="3.5" fill="#f472b6" opacity="0.65"/>
-          <!-- Cute Nose & Mouth -->
-          <polygon points="60,65 57,68 63,68" fill="#fb7185"/>
-          <path d="M 55,71 Q 60,76 65,71" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round"/>
-          <!-- Whiskers -->
-          <line x1="22" y1="62" x2="35" y2="64" stroke="#cbd5e1" stroke-width="2"/>
-          <line x1="22" y1="69" x2="35" y2="68" stroke="#cbd5e1" stroke-width="2"/>
-          <line x1="85" y1="64" x2="98" y2="62" stroke="#cbd5e1" stroke-width="2"/>
-          <line x1="85" y1="68" x2="98" y2="69" stroke="#cbd5e1" stroke-width="2"/>
-          <!-- Little Paws -->
-          <ellipse cx="46" cy="94" rx="10" ry="6" fill="#f1f5f9"/>
-          <ellipse cx="74" cy="94" rx="10" ry="6" fill="#f1f5f9"/>
-        </svg>
+      <div class="cards-list">
+        <div class="reveal-card" onclick="revealCard(this, 'You look adorable')">🤍</div>
+        <div class="reveal-card" onclick="revealCard(this, 'You have the sweetest vibe')">🤍</div>
+        <div class="reveal-card" onclick="revealCard(this, 'You make things feel lighter')">🤍</div>
+        <div class="reveal-card" onclick="revealCard(this, 'You are naturally charming')">🤍</div>
+        <div class="reveal-card" onclick="revealCard(this, 'You make everything feel more special')">🤍</div>
       </div>
 
-      <h2 class="lock-title">Kitty is Guarding My Heart</h2>
-      <p class="lock-sub">Enter our secret passcode (Hint: 143)</p>
-
-      <div class="pin-dots">
-        <div class="dot" id="dot0"></div>
-        <div class="dot" id="dot1"></div>
-        <div class="dot" id="dot2"></div>
-      </div>
-
-      <div class="keypad">
-        <button class="key-btn" onclick="pressKey('1')">1</button>
-        <button class="key-btn" onclick="pressKey('2')">2</button>
-        <button class="key-btn" onclick="pressKey('3')">3</button>
-        <button class="key-btn" onclick="pressKey('4')">4</button>
-        <button class="key-btn" onclick="pressKey('5')">5</button>
-        <button class="key-btn" onclick="pressKey('6')">6</button>
-        <button class="key-btn" onclick="pressKey('7')">7</button>
-        <button class="key-btn" onclick="pressKey('8')">8</button>
-        <button class="key-btn" onclick="pressKey('9')">9</button>
-        <button class="key-btn" onclick="clearPin()">C</button>
-        <button class="key-btn" onclick="pressKey('0')">0</button>
-        <button class="key-btn" onclick="deleteKey()">⌫</button>
-      </div>
-
-      <div class="error-msg" id="errorMsg"></div>
+      <button class="action-btn" onclick="goToScreen(4)">See more ➜</button>
     </div>
-  </section>
 
-  <!-- SCENE 1 -->
-  <section class="scene" id="scene1" onclick="nextScene(2)">
-    <p class="caption-sub">for the one my heart beats for</p>
-    <div class="heart-glow"></div>
-    <p class="tap-hint">TOUCH THE HEART</p>
-  </section>
-
-  <!-- SCENE 2 -->
-  <section class="scene" id="scene2" onclick="nextScene(3)">
-    <p class="title-small">of all the hearts in all the world...</p>
-    <h1 class="big-question">Will You<br/>Be Mine?</h1>
-    <div class="underline-bar"></div>
-    <p class="promise">I promise Sana this is only the beginning</p>
-  </section>
-
-  <!-- SCENE 3 -->
-  <section class="scene" id="scene3" onclick="nextScene(4)">
-    <div class="tree-stage">
-      <div class="tree left">
-        <div class="tree-label">you</div>
-        <div class="heart-bloom-cloud">🌸💖</div>
-        <div class="trunk"></div>
+    <!-- Step 4: Secret Note -->
+    <div class="screen" id="screen-4">
+      <h2 class="fancy-heading" style="font-size: 2.3rem; margin-bottom: 20px;">A little note for you</h2>
+      
+      <!-- Envelope Closed -->
+      <div class="letter-envelope" id="envelope" onclick="openLetter()">
+        <span class="floating-heart" style="left: 14px;">💖</span>
+        <span class="floating-heart" style="right: 14px;">💖</span>
+        <div class="ribbon-icon">🎀</div>
+        <div class="envelope-text">Tap to open</div>
       </div>
-      <div class="signature-text">I love you</div>
-      <div class="tree right">
-        <div class="tree-label">me</div>
-        <div class="heart-bloom-cloud">💙✨</div>
-        <div class="trunk"></div>
+
+      <!-- Letter Opened -->
+      <div class="note-content-box" id="letter-box">
+        <div class="heart-tag">💗</div>
+        <div class="note-text" id="typewriter-text"></div>
+        <div style="text-align: center; margin-top: 15px;">
+          <button class="action-btn" id="next-btn" style="display: none; padding: 9px 24px; font-size: 0.85rem;" onclick="goToScreen(5)">
+            One more thing ➜
+          </button>
+        </div>
       </div>
     </div>
-  </section>
 
-  <!-- SCENE 4 -->
-  <section class="scene" id="scene4">
-    <canvas id="constellation-canvas"></canvas>
-    <div class="center-text">
-      <p class="quote">two wings, one sky</p>
-      <h2 class="headline">fly with me</h2>
+    <!-- Step 5: Final Cute Outro -->
+    <div class="screen" id="screen-5">
+      <div class="avatar-wrapper">
+        <img src="https://media.tenor.com/uR6q1vHjEosAAAAM/cute-hug.gif" alt="Special" />
+      </div>
+      <h2 class="fancy-heading" style="font-size: 2.2rem; color: #ffb8d2;">You'll always be special to me</h2>
     </div>
-    <button class="nav-btn" onclick="nextScene(1)">RELIVE AGAIN</button>
-  </section>
+
+  </div>
 
   <script>
-    // Secret Passcode Config
-    const SECRET_PIN = "143"; 
-    let currentInput = "";
-
-    function pressKey(num) {
-      if (currentInput.length < SECRET_PIN.length) {
-        currentInput += num;
-        updateDots();
-      }
-      if (currentInput.length === SECRET_PIN.length) {
-        setTimeout(verifyPin, 150);
-      }
+    function goToScreen(screenNumber) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById('screen-' + screenNumber).classList.add('active');
     }
 
-    function deleteKey() {
-      currentInput = currentInput.slice(0, -1);
-      updateDots();
-    }
+    function startCutenessTest() {
+      goToScreen(2);
+      let progress = 0;
+      const bar = document.getElementById('progress-bar');
+      const text = document.getElementById('percent-val');
+      const warning = document.getElementById('meter-warning');
+      const status = document.getElementById('meter-status');
 
-    function clearPin() {
-      currentInput = "";
-      updateDots();
-      document.getElementById('errorMsg').innerText = "";
-    }
-
-    function updateDots() {
-      for (let i = 0; i < SECRET_PIN.length; i++) {
-        const dot = document.getElementById(`dot${i}`);
-        if (dot) {
-          if (i < currentInput.length) {
-            dot.classList.add('filled');
-          } else {
-            dot.classList.remove('filled');
-          }
+      const interval = setInterval(() => {
+        progress += 2;
+        if (progress > 120) {
+          clearInterval(interval);
+          warning.style.display = 'inline-block';
+          status.style.display = 'none';
+          setTimeout(() => {
+            goToScreen(3);
+          }, 2400);
+          return;
         }
+        bar.style.width = Math.min(progress, 100) + '%';
+        text.innerText = progress + '%';
+      }, 35);
+    }
+
+    function revealCard(element, message) {
+      if (!element.classList.contains('revealed')) {
+        element.classList.add('revealed');
+        element.innerText = message;
       }
     }
 
-    function verifyPin() {
-      if (currentInput === SECRET_PIN) {
-        document.getElementById('errorMsg').style.color = '#86efac';
-        document.getElementById('errorMsg').innerText = "Unlocked with love! 💕";
-        setTimeout(() => {
-          nextScene(1);
-        }, 600);
-      } else {
-        document.getElementById('errorMsg').style.color = '#fda4af';
-        document.getElementById('errorMsg').innerText = "Oops! Wrong code, try again 🐱";
-        currentInput = "";
-        setTimeout(updateDots, 400);
-      }
+    const noteMessage = "I just wanted to tell you something... you really are special in a way that's hard to explain. There's a softness in the way you talk, a sweetness in the way you smile, and something genuine about you that just feels good to be around. You don't try to be anything extra, you're just you, and that's what makes you so lovely.";
+
+    function openLetter() {
+      document.getElementById('envelope').style.display = 'none';
+      const letterBox = document.getElementById('letter-box');
+      letterBox.style.display = 'block';
+
+      let i = 0;
+      const textElement = document.getElementById('typewriter-text');
+      textElement.innerHTML = '';
+
+      const typing = setInterval(() => {
+        if (i < noteMessage.length) {
+          textElement.innerHTML += noteMessage.charAt(i);
+          i++;
+        } else {
+          clearInterval(typing);
+          document.getElementById('next-btn').style.display = 'inline-flex';
+        }
+      }, 30);
     }
-
-    // Scene Navigation
-    let activeSceneNum = 0;
-    function nextScene(target) {
-      document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
-      const nextEl = document.getElementById(`scene${target}`);
-      if (nextEl) {
-        nextEl.classList.add('active');
-        activeSceneNum = target;
-        if (target === 4) initConstellation();
-      }
-    }
-
-    // Ambient floating background hearts
-    function createBgHearts() {
-      const container = document.getElementById('bg-hearts');
-      const emojis = ['🤍', '✨', '🌸', '💖'];
-      for (let i = 0; i < 16; i++) {
-        const span = document.createElement('span');
-        span.className = 'floating-mini-heart';
-        span.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-        span.style.left = Math.random() * 100 + 'vw';
-        span.style.animationDelay = (Math.random() * 6) + 's';
-        span.style.animationDuration = (5 + Math.random() * 5) + 's';
-        container.appendChild(span);
-      }
-    }
-    createBgHearts();
-
-    // Scene 4: Constellation Canvas
-    function initConstellation() {
-      const canvas = document.getElementById('constellation-canvas');
-      const ctx = canvas.getContext('2d');
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-
-      const points = [];
-      const totalPoints = 18;
-      const scale = Math.min(canvas.width, canvas.height) / 36;
-      const cx = canvas.width / 2;
-      const cy = canvas.height / 2;
-
-      for (let i = 0; i < totalPoints; i++) {
-        const t = (Math.PI * 2 * i) / totalPoints;
-        const x = 16 * Math.pow(Math.sin(t), 3);
-        const y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
-        points.push({ x: cx + x * scale, y: cy + y * scale });
-      }
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.45)';
-      ctx.lineWidth = 1.5;
-      ctx.setLineDash([5, 5]);
-
-      ctx.beginPath();
-      ctx.moveTo(points[0].x, points[0].y);
-      for (let i = 1; i < points.length; i++) {
-        ctx.lineTo(points[i].x, points[i].y);
-      }
-      ctx.closePath();
-      ctx.stroke();
-
-      points.forEach(p => {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, 3.5, 0, Math.PI * 2);
-        ctx.fillStyle = '#ffffff';
-        ctx.shadowColor = '#f472b6';
-        ctx.shadowBlur = 10;
-        ctx.fill();
-      });
-    }
-
-    window.addEventListener('resize', () => {
-      if (activeSceneNum === 4) initConstellation();
-    });
   </script>
 </body>
 </html>
